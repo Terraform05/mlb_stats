@@ -23,24 +23,26 @@ Batting_dict = {
             }
 
 Pitching_dict = {
-                "RANK": "https://www.espn.com/mlb/stats/player/_/view/pitching",
-                "GS": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/gamesStarted/dir/desc",
-                "QS": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/qualityStarts/dir/desc",
-                "ERA": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/ERA/dir/asc",
-                "W": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/wins/dir/desc",
-                "L": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/losses/dir/desc",
-                "SV": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/saves/dir/desc",
-                "HLD": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/holds/dir/desc",
-                "IP": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/innings/dir/desc",
-                "H": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/hits/dir/desc",
-                "ER": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/earnedRuns/dir/desc",
-                "HR": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/homeRuns/dir/desc",
-                "BB": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/walks/dir/desc",
-                "K": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/strikeOuts/dir/desc",
-                "K/9": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/strikeoutsPerNineInnings/dir/desc",
-                "WAR": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/WARBR/dir/desc",
-                "WHIP": "https://www.espn.com/mlb/stats/player/_/view/pitching/table/pitching/sort/WHIP/dir/asc"
-                }
+                "RANK": "https://www.espn.com/mlb/stats/player/_/view/pitching" }
+literals = {"GS": " /table/pitching/sort/gamesStarted/dir/desc",
+                "QS": " /table/pitching/sort/qualityStarts/dir/desc",
+                "ERA": " /table/pitching/sort/ERA/dir/asc",
+                "W": " /table/pitching/sort/wins/dir/desc",
+                "L": " /table/pitching/sort/losses/dir/desc",
+                "SV": " /table/pitching/sort/saves/dir/desc",
+                "HLD": " /table/pitching/sort/holds/dir/desc",
+                "IP": " /table/pitching/sort/innings/dir/desc",
+                "H": " /table/pitching/sort/hits/dir/desc",
+                "ER": " /table/pitching/sort/earnedRuns/dir/desc",
+                "HR": " /table/pitching/sort/homeRuns/dir/desc",
+                "BB": " /table/pitching/sort/walks/dir/desc",
+                "K": " /table/pitching/sort/strikeOuts/dir/desc",
+                "K/9": " /table/pitching/sort/strikeoutsPerNineInnings/dir/desc",
+                "WAR": " /table/pitching/sort/WARBR/dir/desc",
+                "WHIP": " /table/pitching/sort/WHIP/dir/asc"}
+
+for key, value in literals.iteritems():
+    Pitching_dict[key] = Pitching_dict["RANK"] + value
 
 def get_stats_df(url: str):
     source = urllib.request.urlopen(url).read()
@@ -121,7 +123,7 @@ def on_select():
     link = link_dict.get(clicked.get())
     df = get_stats_df(link)
     print(df)
-    df.to_csv(f'{bat_or_pit[0]}_{clicked.get()}_stats.csv')
+    df.to_csv(f'{bat_or_pit[0]}_{clicked.get()}_stats.xlsx')
     root.quit()
     
 options = link_dict.keys()
