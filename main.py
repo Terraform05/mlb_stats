@@ -41,7 +41,7 @@ literals = {"GS": " /table/pitching/sort/gamesStarted/dir/desc",
                 "WAR": " /table/pitching/sort/WARBR/dir/desc",
                 "WHIP": " /table/pitching/sort/WHIP/dir/asc"}
 
-for key, value in literals.iteritems():
+for key, value in literals.items():
     Pitching_dict[key] = Pitching_dict["RANK"] + value
 
 def get_stats_df(url: str):
