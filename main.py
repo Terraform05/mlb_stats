@@ -1,48 +1,53 @@
+from tkinter import *
 import bs4 as bs
 import urllib.request
 import pandas as pd
 
 Batting_dict = {
-            "RANK": "https://www.espn.com/mlb/stats/player",
-            "AB": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/atBats/dir/desc",
-            "R": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/runs/dir/desc",
-            "H": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/hits/dir/desc",
-            "AVG": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/avg/dir/desc",
-            "2B": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/doubles/dir/desc",
-            "3B": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/triples/dir/desc",
-            "HR": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/homeRuns/dir/desc",
-            "RBI": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/rbi/dir/desc",
-            "TB": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/totalBases/dir/desc",
-            "BB": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/walks/dir/desc",
-            "K": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/strikeOuts/dir/desc",
-            "SB": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/stolenBases/dir/desc",
-            "OBP": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/onBasePct/dir/desc",
-            "SLG": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/sluggingPct/dir/desc",
-            "OPS": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/onBasePlusSlugging/dir/desc",
-            "WAR": "https://www.espn.com/mlb/stats/player/_/table/batting/sort/war/dir/desc"            
-            }
+    "RANK": "https://www.espn.com/mlb/stats/player"}
+b_literals = {"AB": "/_/table/batting/sort/atBats/dir/desc",
+              "R": "/_/table/batting/sort/runs/dir/desc",
+              "H": "/_/table/batting/sort/hits/dir/desc",
+              "AVG": "/_/table/batting/sort/avg/dir/desc",
+              "2B": "/_/table/batting/sort/doubles/dir/desc",
+              "3B": "/_/table/batting/sort/triples/dir/desc",
+              "HR": "/_/table/batting/sort/homeRuns/dir/desc",
+              "RBI": "/_/table/batting/sort/RBIs/dir/desc",
+              "TB": "/_/table/batting/sort/totalBases/dir/desc",
+              "BB": "/_/table/batting/sort/walks/dir/desc",
+              "K": "/_/table/batting/sort/strikeOuts/dir/desc",
+              "SB": "/_/table/batting/sort/stolenBases/dir/desc",
+              "OBP": "/_/table/batting/sort/onBasePct/dir/desc",
+              "SLG": "/_/table/batting/sort/sluggingPct/dir/desc",
+              "OPS": "/_/table/batting/sort/onBasePlusSlugging/dir/desc",
+              "WAR": "/_/table/batting/sort/war/dir/desc"
+              }
+
+for key, value in b_literals.items():
+    Batting_dict[key] = Batting_dict["RANK"] + value
 
 Pitching_dict = {
-                "RANK": "https://www.espn.com/mlb/stats/player/_/view/pitching" }
-literals = {"GS": " /table/pitching/sort/gamesStarted/dir/desc",
-                "QS": " /table/pitching/sort/qualityStarts/dir/desc",
-                "ERA": " /table/pitching/sort/ERA/dir/asc",
-                "W": " /table/pitching/sort/wins/dir/desc",
-                "L": " /table/pitching/sort/losses/dir/desc",
-                "SV": " /table/pitching/sort/saves/dir/desc",
-                "HLD": " /table/pitching/sort/holds/dir/desc",
-                "IP": " /table/pitching/sort/innings/dir/desc",
-                "H": " /table/pitching/sort/hits/dir/desc",
-                "ER": " /table/pitching/sort/earnedRuns/dir/desc",
-                "HR": " /table/pitching/sort/homeRuns/dir/desc",
-                "BB": " /table/pitching/sort/walks/dir/desc",
-                "K": " /table/pitching/sort/strikeOuts/dir/desc",
-                "K/9": " /table/pitching/sort/strikeoutsPerNineInnings/dir/desc",
-                "WAR": " /table/pitching/sort/WARBR/dir/desc",
-                "WHIP": " /table/pitching/sort/WHIP/dir/asc"}
+    "RANK": "https://www.espn.com/mlb/stats/player/_/view/pitching"}
+p_literals = {"GS": " /table/pitching/sort/gamesStarted/dir/desc",
+              "QS": " /table/pitching/sort/qualityStarts/dir/desc",
+              "ERA": " /table/pitching/sort/ERA/dir/asc",
+              "W": " /table/pitching/sort/wins/dir/desc",
+              "L": " /table/pitching/sort/losses/dir/desc",
+              "SV": " /table/pitching/sort/saves/dir/desc",
+              "HLD": " /table/pitching/sort/holds/dir/desc",
+              "IP": " /table/pitching/sort/innings/dir/desc",
+              "H": " /table/pitching/sort/hits/dir/desc",
+              "ER": " /table/pitching/sort/earnedRuns/dir/desc",
+              "HR": " /table/pitching/sort/homeRuns/dir/desc",
+              "BB": " /table/pitching/sort/walks/dir/desc",
+              "K": " /table/pitching/sort/strikeOuts/dir/desc",
+              "K/9": " /table/pitching/sort/strikeoutsPerNineInnings/dir/desc",
+              "WAR": " /table/pitching/sort/WARBR/dir/desc",
+              "WHIP": " /table/pitching/sort/WHIP/dir/asc"}
 
-for key, value in literals.items():
+for key, value in p_literals.items():
     Pitching_dict[key] = Pitching_dict["RANK"] + value
+
 
 def get_stats_df(url: str):
     source = urllib.request.urlopen(url).read()
@@ -85,39 +90,42 @@ def get_stats_df(url: str):
             player_stats.append(k.text)
         player_s_stats.append(player_stats)
 
-    #combine rank and team with other stats
+    # combine rank and team with other stats
     for i in range(len(player_s_stats)):
         for j in playa_stats[i][::-1]:
             player_s_stats[i].insert(0, j)
     player_stats = player_s_stats
 
-    #replace header Name with Team
+    # replace header Name with Team
     stat_headers = [s.replace('Name', 'Team') for s in stat_headers]
 
     return pd.DataFrame(data=player_stats, columns=stat_headers, index=player_list)
-    
-    
-#rank_stats = get_stats_df('https://www.espn.com/mlb/stats/player')
+
+
+# rank_stats = get_stats_df('https://www.espn.com/mlb/stats/player')
 
 bat_or_pit = []
 
-from tkinter import *
 root = Tk()
-root.geometry( "200x100" )
+root.geometry("200x100")
+
+
 def on_select():
-  bat_or_pit.append(clicked.get())
-  root.quit()
-  
+    bat_or_pit.append(clicked.get())
+    root.quit()
+
+
 options = ['Batting', 'Pitching']
 clicked = StringVar()
-clicked.set( "Choose a link" )
-drop = OptionMenu( root , clicked , *options )
+clicked.set("Choose a link")
+drop = OptionMenu(root, clicked, *options)
 drop.pack()
-button = Button( root , text = "Select" , command = on_select).pack()  
+button = Button(root, text="Select", command=on_select).pack()
 root.mainloop()
 
 
 link_dict = Batting_dict if bat_or_pit[0] == 'Batting' else Pitching_dict
+
 
 def on_select():
     link = link_dict.get(clicked.get())
@@ -125,11 +133,12 @@ def on_select():
     print(df)
     df.to_csv(f'{bat_or_pit[0]}_{clicked.get()}_stats.xlsx')
     root.quit()
-    
+
+
 options = link_dict.keys()
 clicked = StringVar()
-clicked.set( "Choose a link" )
-drop = OptionMenu( root , clicked , *options )
+clicked.set("Choose a link")
+drop = OptionMenu(root, clicked, *options)
 drop.pack()
-button = Button( root , text = "Select" , command = on_select).pack()
+button = Button(root, text="Select", command=on_select).pack()
 root.mainloop()
