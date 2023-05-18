@@ -28,22 +28,22 @@ for key, value in b_literals.items():
 
 Pitching_dict = {
     "RANK": "https://www.espn.com/mlb/stats/player/_/view/pitching"}
-p_literals = {"GS": " /table/pitching/sort/gamesStarted/dir/desc",
-              "QS": " /table/pitching/sort/qualityStarts/dir/desc",
-              "ERA": " /table/pitching/sort/ERA/dir/asc",
-              "W": " /table/pitching/sort/wins/dir/desc",
-              "L": " /table/pitching/sort/losses/dir/desc",
-              "SV": " /table/pitching/sort/saves/dir/desc",
-              "HLD": " /table/pitching/sort/holds/dir/desc",
-              "IP": " /table/pitching/sort/innings/dir/desc",
-              "H": " /table/pitching/sort/hits/dir/desc",
-              "ER": " /table/pitching/sort/earnedRuns/dir/desc",
-              "HR": " /table/pitching/sort/homeRuns/dir/desc",
-              "BB": " /table/pitching/sort/walks/dir/desc",
-              "K": " /table/pitching/sort/strikeOuts/dir/desc",
-              "K/9": " /table/pitching/sort/strikeoutsPerNineInnings/dir/desc",
-              "WAR": " /table/pitching/sort/WARBR/dir/desc",
-              "WHIP": " /table/pitching/sort/WHIP/dir/asc"}
+p_literals = {"GS": "/_/table/pitching/sort/gamesStarted/dir/desc",
+              "QS": "/_/table/pitching/sort/qualityStarts/dir/desc",
+              "ERA": "/_/table/pitching/sort/ERA/dir/asc",
+              "W": "/_/table/pitching/sort/wins/dir/desc",
+              "L": "/_/table/pitching/sort/losses/dir/desc",
+              "SV": "/_/table/pitching/sort/saves/dir/desc", 
+              "HLD": "/_/table/pitching/sort/holds/dir/desc",
+              "IP": "/_/table/pitching/sort/innings/dir/desc",
+              "H": "/_/table/pitching/sort/hits/dir/desc",
+              "ER": "/_/table/pitching/sort/earnedRuns/dir/desc",
+              "HR": "/_/table/pitching/sort/homeRuns/dir/desc",
+              "BB": "/_/table/pitching/sort/walks/dir/desc",
+              "K": " /_/table/pitching/sort/strikeOuts/dir/desc",
+              "K/9": "/_/table/pitching/sort/strikeoutsPerNineInnings/dir/desc",
+              "WAR": "/_/table/pitching/sort/WARBR/dir/desc",
+              "WHIP": "/_/table/pitching/sort/WHIP/dir/asc"}
 
 for key, value in p_literals.items():
     Pitching_dict[key] = Pitching_dict["RANK"] + value
